@@ -1,0 +1,10 @@
+venv/
+__pycache__/
+*.pyc
+.git/
+.gitignore
+voting.db
+README.md
+.vscode/
+.idea/
+*.md
