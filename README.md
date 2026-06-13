@@ -163,29 +163,81 @@ online-voting/
 
 ## 🌿 Стратегия ветвления (Git)
 
-В проекте используется Git Flow:
+GitFlow структура проекта online-votingv2  
+main — Стабильная версия приложения  
+Содержит проверенный код, готовый к использованию в production. Обновляется только через слияние с release-ветками.
 
-main	Стабильная версия  
-develop	Основная ветка разработки  
-feature/auth-system	Авторизация и голосование  
-feature/fixes	Фиксы интерфейса  
-feature/tests	Модульные тесты  
-feature/docker-improvements	Docker и Nginx  
-feature/documentation	Документация  
-feature/roles-and-security	Безопасность  
+develop — Основная ветка разработки  
+Интеграционная ветка, в которую сливаются все feature-ветки. Содержит актуальную разрабатываемую версию приложения.
 
-Порядок работы с ветками:
+deploy — Деплой на production  
+Создана от main после релиза. Используется для автоматического развертывания приложения на production-сервере.
 
-# Создание новой ветки от develop
-git checkout develop  
-git checkout -b feature/название
+feature/backend — Backend на FastAPI и база данных  
+Разработка серверной части: модели данных, REST API эндпоинты, подключение к базе данных SQLite.
 
-# ... внесение изменений ...
+feature/frontend — Пользовательский интерфейс и голосование  
+Клиентская часть приложения: HTML шаблоны, CSS стили, JavaScript логика аутентификации и голосования.
+
+feature/testing — Тесты и скриншоты  
+API тесты для проверки работоспособности эндпоинтов и скриншоты интерфейса для документирования.
+
+feature/ci-cd — CI/CD пайплайн  
+Настройка GitHub Actions для автоматической проверки кода при push и pull request.
+
+feature/data-init — Инициализация данных  
+Скрипты для первоначального наполнения базы данных тестовой информацией и начальные данные.
+
+release/v1.0.0 — Релиз первой версии  
+Подготовка стабильной версии 1.0.0: финальное тестирование, исправление багов, подготовка к деплою.
+
+# Порядок работы с ветками GitFlow  
+1. Начало работы  
+git clone https://github.com/Vladimir/online-votingv2.git  
+git checkout develop
+
+3. Создание новой функции  
+git checkout -b feature/название-функции develop  
+Работа над функцией  
 git add .  
-git commit -m "описание"  
+git commit -m "Описание изменений"
+
+3. Завершение функции  
 git checkout develop  
-git merge --no-ff feature/название -m "merge: описание"  
+git merge --no-ff feature/название-функции  
+git branch -d feature/название-функции  
 git push origin develop
+
+5. Подготовка релиза  
+git checkout -b release/x.x.x develop  
+# Исправление багов, подготовка к релизу  
+git commit -m "Подготовка релиза x.x.x"
+
+5. Завершение релиза  
+git checkout main  
+git merge --no-ff release/x.x.x  
+git tag -a vx.x.x -m "Версия x.x.x"
+
+git checkout develop  
+git merge --no-ff release/x.x.x  
+git branch -d release/x.x.x
+
+6. Горячие исправления  
+git checkout -b hotfix/описание main  
+# Срочное исправление  
+git commit -m "Исправление критической ошибки"
+
+git checkout main  
+git merge --no-ff hotfix/описание  
+
+git checkout develop  
+git merge --no-ff hotfix/описание  
+git branch -d hotfix/описание
+
+7. Деплой на production  
+git checkout deploy  
+git merge main  
+git push origin deploy
 
 ## 🔒 Система авторизации
 Пароли хэшируются алгоритмом SHA-256
