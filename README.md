@@ -86,14 +86,27 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 
 # 3. Клонировать репозиторий
-git clone https://github.com/Ditry-SD/Online-voting.git  
-cd Online-voting
+git clone https://github.com/Ditry-SD/online-votingv2.git  
+cd online-votingv2
 
 # 4. Создать файл базы данных
 touch voting.db  
 sudo chmod 777 voting.db
 
 # 5. Запустить приложение
+sudo docker compose up -d --build
+
+# 6. Отключение и прочее
+sudo docker compose down
+
+sudo rm -f voting.db - сброс базы данных
+
+# 7. Полный перезапуск
+
+sudo docker compose down  
+sudo rm -f voting.db  
+touch voting.db  
+sudo chmod 777 voting.db  
 sudo docker compose up -d --build
 
 Открыть в браузере: http://IP_адрес
