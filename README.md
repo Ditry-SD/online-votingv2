@@ -42,8 +42,8 @@
 ### Локальный запуск (Windows)
 
 ### 1. Клонировать репозиторий
-git clone https://github.com/Ditry-SD/Online-voting.git  
-cd Online-voting
+git clone https://github.com/Ditry-SD/online-votingv2.git  
+cd online-votingv2
 
 ### 2. Создать и активировать виртуальное окружение
 python -m venv venv  
@@ -63,8 +63,8 @@ http://localhost:8000/docs — Swagger (описание API)
 ### Локальный запуск через Docker
 
 ### 1. Клонировать репозиторий
-git clone https://github.com/Ditry-SD/online-voting.git  
-cd online-voting
+git clone https://github.com/Ditry-SD/online-votingv2.git  
+cd online-votingv2
 
 ### 2. Собрать и запустить контейнер
 docker-compose build  
