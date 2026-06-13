@@ -215,8 +215,7 @@ git commit -m "Подготовка релиза x.x.x"
 5. Завершение релиза  
 git checkout main  
 git merge --no-ff release/x.x.x  
-git tag -a vx.x.x -m "Версия x.x.x"
-
+git tag -a vx.x.x -m "Версия x.x.x"  
 git checkout develop  
 git merge --no-ff release/x.x.x  
 git branch -d release/x.x.x
@@ -224,11 +223,9 @@ git branch -d release/x.x.x
 6. Горячие исправления  
 git checkout -b hotfix/описание main  
 _Срочное исправление_ 
-git commit -m "Исправление критической ошибки"
-
+git commit -m "Исправление критической ошибки"  
 git checkout main  
 git merge --no-ff hotfix/описание  
-
 git checkout develop  
 git merge --no-ff hotfix/описание  
 git branch -d hotfix/описание
