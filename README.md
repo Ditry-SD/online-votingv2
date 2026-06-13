@@ -41,19 +41,18 @@
 
 ### Локальный запуск (Windows)
 
-bash
-# 1. Клонировать репозиторий
+### 1. Клонировать репозиторий
 git clone https://github.com/Ditry-SD/Online-voting.git  
 cd Online-voting
 
-# 2. Создать и активировать виртуальное окружение
+### 2. Создать и активировать виртуальное окружение
 python -m venv venv  
 venv\Scripts\activate
 
-# 3. Установить зависимости
+### 3. Установить зависимости
 pip install -r requirements.txt
 
-# 4. Запустить приложение
+### 4. Запустить приложение
 uvicorn backend.main:app --reload
 
 После запуска открыть в браузере:  
@@ -61,13 +60,13 @@ http://localhost:8000 — главная страница
 http://localhost:8000/results  — результаты   
 http://localhost:8000/docs — Swagger (описание API)
 
-# Локальный запуск через Docker
+### Локальный запуск через Docker
 
-# 1. Клонировать репозиторий
+### 1. Клонировать репозиторий
 git clone https://github.com/Ditry-SD/online-voting.git  
 cd online-voting
 
-# 2. Собрать и запустить контейнер
+### 2. Собрать и запустить контейнер
 docker-compose build  
 docker-compose up  
 или  
@@ -76,32 +75,32 @@ docker-compose dowm (отключение)
 
 После запуска открыть в браузере: http://localhost
 
-# Развертывание на облачном сервере (SberCloud)
+### Развертывание на облачном сервере (SberCloud)
 
-# 1. Подключиться к серверу по SSH
+### 1. Подключиться к серверу по SSH
 ssh user1@IP_адрес
 
-# 2. Установить Docker
+### 2. Установить Docker
 curl -fsSL https://get.docker.com -o get-docker.sh  
 sudo sh get-docker.sh
 
-# 3. Клонировать репозиторий
+### 3. Клонировать репозиторий
 git clone https://github.com/Ditry-SD/online-votingv2.git  
 cd online-votingv2
 
-# 4. Создать файл базы данных
+### 4. Создать файл базы данных
 touch voting.db  
 sudo chmod 777 voting.db
 
-# 5. Запустить приложение
+### 5. Запустить приложение
 sudo docker compose up -d --build
 
-# 6. Отключение и прочее
+### 6. Отключение и прочее
 sudo docker compose down
 
 sudo rm -f voting.db - сброс базы данных
 
-# 7. Полный перезапуск
+### 7. Полный перезапуск
 
 sudo docker compose down  
 sudo rm -f voting.db  
@@ -111,15 +110,15 @@ sudo docker compose up -d --build
 
 Открыть в браузере: http://IP_адрес
 
-# Запуск тестов
+## Запуск тестов
 
-# Локально через Docker
+### Локально через Docker
 docker compose run --rm web python -m pytest test/test_api.py -v
 
-# На сервере
+### На сервере
 sudo docker compose run --rm web python -m pytest test/test_api.py -v
 
-# 📡 API Endpoints
+## 📡 API Endpoints
 Метод	URL	Описание	Авторизация  
 GET	/	Главная страница	Нет  
 GET	/results	Результаты голосования	Нет  
@@ -163,35 +162,35 @@ online-voting/
 
 ## 🌿 Стратегия ветвления (Git)
 
-GitFlow структура проекта online-votingv2  
-main — Стабильная версия приложения  
+### GitFlow структура проекта online-votingv2  
+- main — Стабильная версия приложения  
 Содержит проверенный код, готовый к использованию в production. Обновляется только через слияние с release-ветками.
 
-develop — Основная ветка разработки  
+- develop — Основная ветка разработки  
 Интеграционная ветка, в которую сливаются все feature-ветки. Содержит актуальную разрабатываемую версию приложения.
 
-deploy — Деплой на production  
+- deploy — Деплой на production  
 Создана от main после релиза. Используется для автоматического развертывания приложения на production-сервере.
 
-feature/backend — Backend на FastAPI и база данных  
+- feature/backend — Backend на FastAPI и база данных  
 Разработка серверной части: модели данных, REST API эндпоинты, подключение к базе данных SQLite.
 
-feature/frontend — Пользовательский интерфейс и голосование  
+- feature/frontend — Пользовательский интерфейс и голосование  
 Клиентская часть приложения: HTML шаблоны, CSS стили, JavaScript логика аутентификации и голосования.
 
-feature/testing — Тесты и скриншоты  
+- feature/testing — Тесты и скриншоты  
 API тесты для проверки работоспособности эндпоинтов и скриншоты интерфейса для документирования.
 
-feature/ci-cd — CI/CD пайплайн  
+- feature/ci-cd — CI/CD пайплайн  
 Настройка GitHub Actions для автоматической проверки кода при push и pull request.
 
-feature/data-init — Инициализация данных  
+- feature/data-init — Инициализация данных  
 Скрипты для первоначального наполнения базы данных тестовой информацией и начальные данные.
 
-release/v1.0.0 — Релиз первой версии  
+- release/v1.0.0 — Релиз первой версии  
 Подготовка стабильной версии 1.0.0: финальное тестирование, исправление багов, подготовка к деплою.
 
-# Порядок работы с ветками GitFlow  
+## Порядок работы с ветками GitFlow  
 1. Начало работы  
 git clone https://github.com/Vladimir/online-votingv2.git  
 git checkout develop
